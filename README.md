@@ -2,72 +2,116 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**URL**: https://bailout.ng
 
-## How can I edit this code?
+# Bailout
 
-There are several ways of editing your application.
+Bailout is a digital financial access platform for Nigerian micro, small, and medium-sized enterprises (MSMEs). It is designed to make funding opportunities easier to discover, understand, and pursue by connecting businesses with relevant loans, grants, advisory support, and growth resources.
 
-**Use Lovable**
+This repository contains the frontend experience for the Bailout platform, including its public landing page and an interactive loan/grant application prototype.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Product focus
 
-Changes made via Lovable will be committed automatically to this repo.
+Bailout is built around the challenges MSMEs face when seeking capital:
 
-**Use your preferred IDE**
+- Finding credible loans and grants in a fragmented funding landscape
+- Understanding eligibility requirements and application processes
+- Building the financial visibility lenders need to assess risk
+- Accessing practical guidance for sustainable business growth
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+The product direction includes a two-sided marketplace that can match businesses with suitable funding instruments, support credit intelligence, and provide anonymized market insight to institutions.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Current experience
 
-Follow these steps:
+The current frontend includes:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- A responsive single-page product website
+- A three-step loan/grant application flow covering personal, business, and financial information
+- Product sections covering MSME financing, advisory, growth acceleration, and financial tools
+- Funding-match, grant-discovery, credit-risk, secure-disbursement, and market-intelligence feature areas
+- Language support for English, Yoruba, Hausa, Igbo, and Nigerian Pidgin
+- Optional welcome text-to-speech through a Supabase Edge Function with browser speech fallback
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+> **Prototype note:** Application submission is currently simulated in the browser. The form does not yet persist applications or connect applicants to live lenders, grants, credit bureaus, or disbursement systems.
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Tech stack
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+- React 18 and TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui and Radix UI primitives
+- React Router
+- TanStack React Query
+- Supabase Edge Functions
+- Vitest and Testing Library
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 18 or newer
+- npm, or Bun if you prefer the repository's existing lockfile
+
+### Installation
+
+```bash
+git clone <repository-url>
+cd bail-out
+npm install
+```
+
+### Run locally
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Vite will print the local URL, usually `http://localhost:5173`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available scripts
 
-**Use GitHub Codespaces**
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Create a production build |
+| `npm run build:dev` | Create a development-mode build |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+| `npm run test` | Run the test suite once |
+| `npm run test:watch` | Run Vitest in watch mode |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Environment variables
 
-## What technologies are used for this project?
+The multilingual welcome audio uses the Supabase Edge Function configured in `src/contexts/LanguageContext.tsx`. To enable it locally, create a `.env.local` file with:
 
-This project is built with:
+```bash
+VITE_SUPABASE_URL=<your-supabase-project-url>
+VITE_SUPABASE_PUBLISHABLE_KEY=<your-supabase-publishable-key>
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The `welcome-tts` function also requires an `ELEVENLABS_API_KEY` configured as a Supabase secret. If the function is unavailable, the app falls back to the browser's built-in speech synthesis where supported.
 
-## How can I deploy this project?
+Never commit credentials or private keys to the repository.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Project structure
 
-## Can I connect a custom domain to my Lovable project?
+```text
+src/
+├── components/       Reusable product sections and UI components
+├── contexts/          Shared application state, including language support
+├── integrations/      Supabase client and generated types
+├── pages/             Route-level pages
+├── App.tsx            Application providers and routing
+└── main.tsx           Application entry point
 
-Yes, you can!
+supabase/
+└── functions/        Supabase Edge Functions
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Ownership
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Bailout is currently designed, built, and maintained by a sole developer. The codebase favors a focused, modular frontend foundation that can grow into the full funding marketplace as backend integrations and production workflows are introduced.
+
+## Status
+
+This project is under active development. The public website and interaction flows are available for product exploration; financial matching, application persistence, identity verification, lender integrations, and production safeguards remain part of the roadmap.
